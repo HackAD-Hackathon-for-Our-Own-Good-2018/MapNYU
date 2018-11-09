@@ -8,6 +8,8 @@ h = 1250;
 var minZoom;
 var maxZoom;
 
+var studySites = ["CHN", "ARE", "USA", "AUS","GBR", "DEU", "FRA", "ESP", "CZE", "ITA", "GHA", "ARG", "ISR"];
+
 // DEFINE FUNCTIONS/OBJECTS
 // Define map projection
 var projection = d3
@@ -139,6 +141,9 @@ d3.json(
   "https://raw.githubusercontent.com/andybarefoot/andybarefoot-www/master/maps/mapdata/custom50.json", function(json) {
     //Bind data and create one path per GeoJSON feature
     countriesGroup = svg.append("g").attr("id", "map");
+
+    
+
     // add a background rectangle
     countriesGroup
       .append("rect")
@@ -157,24 +162,31 @@ d3.json(
       .attr("id", function(d, i) {
         return "country" + d.properties.iso_a3;
       })
-      .attr("class", "country")
+      .attr("class", "country") 
 //      .attr("stroke-width", 10)
 //      .attr("stroke", "#ff0000")
       // add a mouseover action to show name label for feature/country
       .on("mouseover", function(d, i) {
+        if(studySites.includes(d.properties.iso_a3)){
           d3.select("#countryLabel" + d.properties.iso_a3).style("display", "block");
+        }
       })
       .on("mouseout", function(d, i) {
-          d3.select("#countryLabel" + d.properties.iso_a3).style("display", "none");
+        if(studySites.includes(d.properties.iso_a3)){  
+        d3.select("#countryLabel" + d.properties.iso_a3).style("display", "none");
+        }
       })
       // add an onclick action to zoom into clicked country
       .on("click", function(d, i) {
+        if(studySites.includes(d.properties.iso_a3)){
           d3.selectAll(".country").classed("country-on", false);
           d3.select(this).classed("country-on", true);
       boxZoom(path.bounds(d), path.centroid(d), 20);
+        }
       });
     // Add a label group to each feature/country. This will contain the country name and a background rectangle
     // Use CSS to have class "countryLabel" initially hidden
+
     countryLabels = countriesGroup
       .selectAll("g")
       .data(json.features)
@@ -191,16 +203,22 @@ d3.json(
       })
       // add mouseover functionality to the label
       .on("mouseover", function(d, i) {
+        if(studySites.includes(d.properties.iso_a3)){
           d3.select(this).style("display", "block");
+        }
       })
       .on("mouseout", function(d, i) {
-           d3.select(this).style("display", "none");
-     })
+        if(studySites.includes(d.properties.iso_a3)){   
+        d3.select(this).style("display", "none");
+        }
+      })
       // add an onlcick action to zoom into clicked country
       .on("click", function(d, i) {
           d3.selectAll(".country").classed("country-on", false);
+          if(studySites.includes(d.properties.iso_a3)){
           d3.select("#country" + d.properties.iso_a3).classed("country-on", true);
-        boxZoom(path.bounds(d), path.centroid(d), 20);
+          }
+          boxZoom(path.bounds(d), path.centroid(d), 20);
       });
     // add the text to the label group showing country name
     countryLabels
