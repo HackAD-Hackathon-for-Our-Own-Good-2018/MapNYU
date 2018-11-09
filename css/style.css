@@ -15,10 +15,10 @@ svg rect {
 .country{
   fill: #d0d0d0;   /* country colour */
   stroke: #2A2C39; /* country border colour */
-  stroke-width: 1; /* country border width */
+  stroke-width: 2; /* country border width */
 }
 .country-on{
-  fill: #4B5358;   /* highlight colour for selected country */
+  fill: 	 #cc33ff;   /* highlight colour for selected country */
 }
 .countryLabel{
   display: none;   /* hide all country labels by default */
