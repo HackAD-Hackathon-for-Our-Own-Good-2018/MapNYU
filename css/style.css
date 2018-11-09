@@ -10,7 +10,7 @@ body {
   height: 100vh;
 }
 svg rect {
-  fill: #2A2C39;   /* map background colour */
+  fill: #57068c;   /* map background colour */
 }
 .country{
   fill: #d0d0d0;   /* country colour */
