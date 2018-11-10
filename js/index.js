@@ -135,15 +135,13 @@ var svg = d3
   .call(zoom)
 ;
 
-
+var g;
 // get map data
 d3.json(
   "https://raw.githubusercontent.com/andybarefoot/andybarefoot-www/master/maps/mapdata/custom50.json", function(json) {
     //Bind data and create one path per GeoJSON feature
     countriesGroup = svg.append("g").attr("id", "map");
-    
-
-
+    g = svg.append("g");
     // add a background rectangle
     countriesGroup
       .append("rect")
@@ -246,21 +244,8 @@ d3.json(
         return d.bbox.height;
       });
     initiateZoom();
-
-    var marks = [{long: -75, lat: 43},{long: -78, lat: 41},{long: -70, lat: 53}];
-
-     svg.selectAll(".mark")
-    .data(marks)
-    .enter()
-    .append("image")
-    .attr('class','mark')
-    .attr("width", function(d) {
-      return d.bbox.width + 4;
-    })
-    .attr("height", function(d) {
-      return d.bbox.height;
-    })
-    .attr("xlink:href",'https://cdn3.iconfinder.com/data/icons/softwaredemo/PNG/24x24/DrawingPin1_Blue.png')
-    .attr("transform", d => `translate(${projection([d.long,d.lat])}`);
   }
 );
+
+
+
