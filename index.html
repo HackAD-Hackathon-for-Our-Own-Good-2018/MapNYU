@@ -71,9 +71,17 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a 
     popupAnchor:  [0, -10] // point from which the popup should open relative to the iconAnchor
 });
 
-for (var i = 0; i < points.length; i++) {
-        L.marker([points[i][1], points[i][2]], {icon: Icon}).bindPopup(points[i][0]).addTo(map);
-    }
+
+for (i = 0; i < points.length; i++) {
+        city = points[i][0]
+        L.marker([points[i][1], points[i][2]], {icon: Icon}).addTo(map);
+}
+
+
+
+// function onClick(e){
+//   alert("This works!")
+// }
 
 
 </script>
